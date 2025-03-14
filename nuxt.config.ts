@@ -2,9 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  typescript: {
-    typeCheck: true,
-  },
   css: ["~/assets/css/main.css"],
   modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/eslint"],
 })
