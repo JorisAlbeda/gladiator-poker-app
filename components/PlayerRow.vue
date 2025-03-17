@@ -11,6 +11,7 @@ const formState = reactive<Partial<Schema>>({ name: undefined })
 
 const supabaseClient = useSupabaseClient()
 const toast = useToast()
+const form = useTemplateRef<Form<Schema>>("playerForm").value
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   const newPlayerName = event.data.name
@@ -34,7 +35,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     })
   }
   formState.name = undefined
-  const form = useTemplateRef<Form<Schema>>("playerForm").value
   form?.clear()
 }
 </script>
