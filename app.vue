@@ -1,5 +1,7 @@
 <template>
   <UApp>
-    <NuxtPage />
+    <UContainer class="py-8">
+      <NuxtPage />
+    </UContainer>
   </UApp>
 </template>
