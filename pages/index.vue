@@ -36,7 +36,6 @@ onUnmounted(() => {
 const toast = useToast()
 
 async function deletePlayer(playerId: number) {
-  console.log(`Deleting player ${playerId}`)
   const response = await client.from("players").delete().eq("id", playerId)
   if (response.error) {
     toast.add({
