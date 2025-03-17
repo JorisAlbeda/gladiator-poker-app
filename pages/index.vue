@@ -42,5 +42,6 @@ onUnmounted(() => {
         {{ player.name }}
       </li>
     </ul>
+    <PlayerRow />
   </div>
 </template>
