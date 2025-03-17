@@ -9,9 +9,14 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "resolutions": {
+    "cookie": "0.7.2"
+  },
   "dependencies": {
     "@nuxt/ui": "^3.0.0",
+    "@nuxtjs/supabase": "^1.5.0",
     "@pinia/nuxt": "^0.10.1",
+    "@supabase/supabase-js": "^2.49.1",
     "nuxt": "^3.16.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
