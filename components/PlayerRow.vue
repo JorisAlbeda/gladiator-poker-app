@@ -9,6 +9,7 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 const formState = reactive<Partial<Schema>>({ name: undefined })
 
+const supabaseClient = useSupabaseClient()
 const toast = useToast()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -18,6 +19,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     .insert({ name: newPlayerName })
     .select("id")
     .single()
+
   if (error || !data) {
     toast.add({
       title: "Oh noes!",
@@ -33,19 +35,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   }
   formState.name = undefined
 }
-
-const supabaseClient = useSupabaseClient()
 </script>
 
 <template>
-  <UForm :state="formState" :schema="schema" @submit="onSubmit">
-    <UFormField name="name">
-      <UInput
-        v-model="formState.name"
-        type="text"
-        placeholder="New player name"
-        icon="i-heroicons-plus-circle-solid"
-      />
-    </UFormField>
+  <UForm :state="formState" :schema="schema" @submit.prevent="onSubmit">
+    <div class="flex gap-4">
+      <UFormField name="name">
+        <UInput
+          v-model="formState.name"
+          type="text"
+          placeholder="New player name"
+          icon="i-heroicons-plus-circle-solid"
+        />
+      </UFormField>
+      <template v-if="formState.name && formState.name.length > 0">
+        <UButton
+          loading-auto
+          icon="i-heroicons-check"
+          color="secondary"
+          type="submit"
+          >Save
+        </UButton>
+      </template>
+    </div>
   </UForm>
 </template>
