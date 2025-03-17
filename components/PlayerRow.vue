@@ -11,14 +11,30 @@ const formState = reactive<Partial<Schema>>({ name: undefined })
 
 const toast = useToast()
 
-function onSubmit(event: FormSubmitEvent<Schema>) {
-  toast.add({
-    title: "New Player",
-    description: `Player ${event.data.name} was added!`,
-    color: "success",
-  })
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const newPlayerName = event.data.name
+  const { data, error } = await supabaseClient
+    .from("players")
+    .insert({ name: newPlayerName })
+    .select("id")
+    .single()
+  if (error || !data) {
+    toast.add({
+      title: "Oh noes!",
+      description: `Error adding player ${newPlayerName}: ${error.message}`,
+      color: "error",
+    })
+  } else {
+    toast.add({
+      title: "New Player",
+      description: `Player ${newPlayerName} was added! Id: ${data.id}`,
+      color: "success",
+    })
+  }
   formState.name = undefined
 }
+
+const supabaseClient = useSupabaseClient()
 </script>
 
 <template>
