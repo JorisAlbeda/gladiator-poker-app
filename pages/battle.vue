@@ -16,7 +16,7 @@ async function hitPlayer(playerId: number) {
 </script>
 
 <template>
-  <div>
+  <TransitionGroup name="list">
     <UCard v-for="player in players" :key="player.id">
       <div class="flex justify-between">
         <span>{{ player.name }}</span>
@@ -30,5 +30,5 @@ async function hitPlayer(playerId: number) {
         <span v-else class="text-error-100">Uitgeschakeld</span>
       </div>
     </UCard>
-  </div>
+  </TransitionGroup>
 </template>

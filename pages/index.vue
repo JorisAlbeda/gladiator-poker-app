@@ -33,7 +33,7 @@ async function startNewRound() {
 </script>
 
 <template>
-  <div>
+  <TransitionGroup name="list">
     <div class="flex">
       <h1 class="text-4xl mb-2">Players</h1>
     </div>
@@ -61,5 +61,5 @@ async function startNewRound() {
       </li>
     </ul>
     <PlayerRow />
-  </div>
+  </TransitionGroup>
 </template>
