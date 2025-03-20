@@ -15,11 +15,35 @@ async function deletePlayer(playerId: number) {
     })
   }
 }
+
+async function startNewRound() {
+  const currentRoundId = 1 //TODO: get currentRound from current game and increment
+  const playerRoundList: { round_id: number; player_id: number }[] = []
+  players.value?.forEach((player) => {
+    playerRoundList.push({
+      round_id: currentRoundId,
+      player_id: player.id,
+    })
+  })
+  console.log(playerRoundList)
+  await client.from("player_round").insert(playerRoundList)
+  navigateTo("/battle")
+}
 </script>
 
 <template>
   <div>
-    <h1 class="text-4xl mb-8">Players</h1>
+    <div class="flex">
+      <h1 class="text-4xl mb-2">Players</h1>
+    </div>
+    <UButton
+      icon="i-heroicons-plus"
+      size="sm"
+      color="primary"
+      class="mb-4"
+      @click="startNewRound"
+      >New Round</UButton
+    >
     <ul>
       <li
         v-for="player in players"

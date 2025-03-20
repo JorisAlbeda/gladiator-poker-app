@@ -4,3 +4,11 @@
 @theme {
   --font-sans: "Public Sans", sans-serif;
 }
+
+@layer base {
+  button,
+  [role="button"] {
+    @apply cursor-pointer;
+    @apply disabled:cursor-not-allowed;
+  }
+}
