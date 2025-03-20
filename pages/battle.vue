@@ -36,7 +36,10 @@ async function hitPlayer(playerId: number) {
               >
               <span v-else class="text-error-200">Uitgeschakeld</span>
             </div>
-            <div v-else>{{ index + 1 }}</div>
+            <div v-else>
+              <span v-if="index < 5">{{ index + 1 }}</span>
+              <span v-else>-</span>
+            </div>
           </div>
         </UCard>
       </TransitionGroup>
