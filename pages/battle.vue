@@ -1,18 +1,17 @@
 <script lang="ts" setup>
 // const players = useGetRealtimePlayers()
-const currentRound = 1 //TODO: change to game's current round
+const currentRoundId = 1 //TODO: change to game's current round
 
 const supaClient = useSupabaseClient()
-const { data: players } = await supaClient
-  .from("players")
-  .select("id, name, player_round (eliminated_at)")
-  .eq("player_round.round_id", currentRound)
+const players = useGetRealtimeBattle(currentRoundId)
 
 async function hitPlayer(playerId: number) {
-  await supaClient
+  const response = await supaClient
     .from("player_round")
     .update({ eliminated_at: new Date().toISOString() })
-    .eq("id", playerId)
+    .eq("player_id", playerId)
+    .select()
+  console.log(response)
 }
 </script>
 
