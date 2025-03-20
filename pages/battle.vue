@@ -21,8 +21,9 @@ async function hitPlayer(playerId: number) {
       <div class="flex justify-between">
         <span>{{ player.name }}</span>
         <UButton
-          v-if="!player.player_round[0].eliminated_at"
+          v-if="!player.eliminated_at"
           color="error"
+          loading-auto
           @click="hitPlayer(player.id)"
           >Hit</UButton
         >

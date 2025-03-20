@@ -6,12 +6,16 @@ export const useGetRealtimeBattle = (currentRoundId: number) => {
 
   // Fetch players and get the refresh method provided by useAsyncData
   const { data: players, refresh: refreshPlayers } = useAsyncData(
-    "players",
+    "battle",
     async () => {
       const { data: players } = await supaClient
-        .from("players")
-        .select("id, name, player_round (eliminated_at)")
-        .eq("player_round.round_id", currentRoundId)
+        .from("player_round")
+        .select("...players(id, name), eliminated_at")
+        .eq("round_id", currentRoundId)
+        .order("eliminated_at", {
+          ascending: false,
+          nullsFirst: true,
+        })
       return players
     }
   )
