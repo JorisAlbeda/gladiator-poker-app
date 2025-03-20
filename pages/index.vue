@@ -35,7 +35,7 @@ async function startNewRound() {
 <template>
   <TransitionGroup name="list">
     <div class="flex">
-      <h1 class="text-4xl mb-2">Players</h1>
+      <h1>Players</h1>
     </div>
     <UButton
       icon="i-heroicons-plus"

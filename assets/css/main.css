@@ -11,6 +11,10 @@
     @apply cursor-pointer;
     @apply disabled:cursor-not-allowed;
   }
+
+  h1 {
+    @apply text-4xl mb-2;
+  }
 }
 
 @layer utilities {
