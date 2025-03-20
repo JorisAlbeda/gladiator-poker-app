@@ -38,23 +38,23 @@ export type Database = {
       player_round: {
         Row: {
           created_at: string
+          eliminated_at: string | null
           id: number
           player_id: number
-          rank: number | null
           round_id: number | null
         }
         Insert: {
           created_at?: string
+          eliminated_at?: string | null
           id?: number
           player_id: number
-          rank?: number | null
           round_id?: number | null
         }
         Update: {
           created_at?: string
+          eliminated_at?: string | null
           id?: number
           player_id?: number
-          rank?: number | null
           round_id?: number | null
         }
         Relationships: [

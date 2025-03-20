@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TablesInsert } from "~/types/database.types"
 const client = useSupabaseClient()
 
 const players = useGetRealtimePlayers()
@@ -18,14 +19,14 @@ async function deletePlayer(playerId: number) {
 
 async function startNewRound() {
   const currentRoundId = 1 //TODO: get currentRound from current game and increment
-  const playerRoundList: { round_id: number; player_id: number }[] = []
+  const playerRoundList: TablesInsert<"player_round">[] = []
   players.value?.forEach((player) => {
     playerRoundList.push({
       round_id: currentRoundId,
       player_id: player.id,
+      eliminated_at: null,
     })
   })
-  console.log(playerRoundList)
   await client.from("player_round").insert(playerRoundList)
   navigateTo("/battle")
 }
