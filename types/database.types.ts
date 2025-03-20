@@ -9,6 +9,71 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      games: {
+        Row: {
+          created_at: string
+          current_round_id: number | null
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          current_round_id?: number | null
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          current_round_id?: number | null
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "games_current_round_id_fkey"
+            columns: ["current_round_id"]
+            isOneToOne: false
+            referencedRelation: "rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      player_round: {
+        Row: {
+          created_at: string
+          id: number
+          player_id: number
+          rank: number | null
+          round_id: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          player_id: number
+          rank?: number | null
+          round_id?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          player_id?: number
+          rank?: number | null
+          round_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "player_round_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "player_round_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       players: {
         Row: {
           created_at: string
@@ -26,6 +91,35 @@ export type Database = {
           name?: string
         }
         Relationships: []
+      }
+      rounds: {
+        Row: {
+          created_at: string
+          game_id: number
+          id: number
+          number: number
+        }
+        Insert: {
+          created_at?: string
+          game_id: number
+          id?: number
+          number: number
+        }
+        Update: {
+          created_at?: string
+          game_id?: number
+          id?: number
+          number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Round_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

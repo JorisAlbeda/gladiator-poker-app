@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "supabase-login": "npx supabase login",
-    "supabase-gen": "npx supabase gen types typescript --project-id ijveijhonbyhfdldkuti > types/database.types.ts"
+    "supabase-types": "npx supabase gen types typescript --project-id ijveijhonbyhfdldkuti > types/database.types.ts"
   },
   "resolutions": {
     "cookie": "0.7.2"
