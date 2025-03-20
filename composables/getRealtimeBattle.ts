@@ -16,13 +16,18 @@ export const useGetRealtimeBattle = (currentRoundId: number) => {
           ascending: false,
           nullsFirst: true,
         })
-      return players
+      const activePlayers = players?.filter((player) => !player.eliminated_at)
+      const roundActive = activePlayers && activePlayers.length > 1
+      return {
+        roundActive,
+        players,
+      }
     }
   )
 
   // Once page is mounted, listen to changes on the `players` table and refresh players when receiving event
   onMounted(() => {
-    // Real time listener for new workouts
+    // Real time listener for player updates
     realtimeChannel = supaClient
       .channel("public:battle")
       .on(
