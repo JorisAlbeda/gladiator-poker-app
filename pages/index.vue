@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { TablesInsert } from "~/types/database.types"
+
 const client = useSupabaseClient()
-
 const players = useGetRealtimePlayers()
-
 const toast = useToast()
 
 async function deletePlayer(playerId: number) {
@@ -20,20 +19,21 @@ async function deletePlayer(playerId: number) {
 async function startNewRound() {
   const currentRoundId = 1 //TODO: get currentRound from current game and increment
   const playerRoundList: TablesInsert<"player_round">[] = []
-  players.value?.forEach((player) => {
-    playerRoundList.push({
-      round_id: currentRoundId,
-      player_id: player.id,
-      eliminated_at: null,
+  if (players)
+    players.value?.forEach((player) => {
+      playerRoundList.push({
+        round_id: currentRoundId,
+        player_id: player.id,
+        eliminated_at: null,
+      })
     })
-  })
   await client.from("player_round").insert(playerRoundList)
   navigateTo("/battle")
 }
 </script>
 
 <template>
-  <TransitionGroup name="list">
+  <div>
     <div class="flex">
       <h1>Players</h1>
     </div>
@@ -45,7 +45,7 @@ async function startNewRound() {
       @click="startNewRound"
       >New Round</UButton
     >
-    <ul>
+    <TransitionGroup name="list" tag="ul">
       <li
         v-for="player in players"
         :key="player.id"
@@ -59,7 +59,7 @@ async function startNewRound() {
           @click="deletePlayer(player.id)"
         />
       </li>
-    </ul>
+    </TransitionGroup>
     <PlayerRow />
-  </TransitionGroup>
+  </div>
 </template>
