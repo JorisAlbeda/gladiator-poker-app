@@ -7,9 +7,14 @@ const { data: games } = await supaClient
 </script>
 
 <template>
-  <div>
-    <NuxtLink v-for="game in games" :key="game.id" :to="`/game/${game.id}/`">{{
-      game.name
-    }}</NuxtLink>
+  <div class="flex flex-col gap-4">
+    <UButton
+      v-for="game in games"
+      :key="game.id"
+      variant="ghost"
+      class="justify-center"
+      :to="{ name: 'game-id', params: { id: game.id } }"
+      >{{ game.name }}</UButton
+    >
   </div>
 </template>

@@ -12,7 +12,7 @@ function loadGame() {
     <h1>Gladiator Poker</h1>
     <GameLinks v-if="isLoading" />
     <div v-else class="flex flex-col gap-4 justify-center">
-      <UButton variant="ghost" class="w-4 justify-center" v-if="recentGameId"
+      <UButton v-if="recentGameId" variant="ghost" class="justify-center"
         >Continue</UButton
       >
       <UButton variant="ghost" class="justify-center">New Game</UButton>
