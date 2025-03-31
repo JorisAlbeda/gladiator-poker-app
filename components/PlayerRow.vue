@@ -30,7 +30,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   } else {
     toast.add({
       title: "New Player",
-      description: `Player ${newPlayerName} was added! Id: ${data.id}`,
+      description: `Player ${newPlayerName} was added!`,
       color: "success",
     })
   }

@@ -9,13 +9,13 @@ const isOnline = useOnline()
 <template>
   <UApp>
     <UContainer class="py-8">
-      <NuxtPage v-if="isOnline" />
       <UAlert
-        v-else
+        v-if="!isOnline"
         color="error"
         title="You are offline!"
         description="Please check your internet connection."
       />
+      <NuxtPage />
     </UContainer>
   </UApp>
 </template>
