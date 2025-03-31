@@ -11,7 +11,6 @@ async function hitPlayer(playerId: number) {
     .update({ eliminated_at: new Date().toISOString() })
     .eq("player_id", playerId)
     .select()
-  console.log(response)
 }
 </script>
 

@@ -1,29 +1,9 @@
 import type { RealtimeChannel } from "@supabase/supabase-js"
 export const useGetRealtimeBattle = (currentRoundId: number) => {
   const supaClient = useSupabaseClient()
+  const { battleStatus, refreshStatus } = useGetBattleStatus(currentRoundId)
 
   let realtimeChannel: RealtimeChannel
-
-  // Fetch players and get the refresh method provided by useAsyncData
-  const { data: players, refresh: refreshPlayers } = useAsyncData(
-    "battle",
-    async () => {
-      const { data: players } = await supaClient
-        .from("player_round")
-        .select("...players(id, name), eliminated_at")
-        .eq("round_id", currentRoundId)
-        .order("eliminated_at", {
-          ascending: false,
-          nullsFirst: true,
-        })
-      const activePlayers = players?.filter((player) => !player.eliminated_at)
-      const roundActive = activePlayers && activePlayers.length > 1
-      return {
-        roundActive,
-        players,
-      }
-    }
-  )
 
   // Once page is mounted, listen to changes on the `players` table and refresh players when receiving event
   onMounted(() => {
@@ -33,12 +13,12 @@ export const useGetRealtimeBattle = (currentRoundId: number) => {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "players" },
-        () => refreshPlayers()
+        () => refreshStatus()
       )
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "player_round" },
-        () => refreshPlayers()
+        () => refreshStatus()
       )
 
     realtimeChannel.subscribe()
@@ -49,5 +29,5 @@ export const useGetRealtimeBattle = (currentRoundId: number) => {
     supaClient.removeChannel(realtimeChannel)
   })
 
-  return players
+  return battleStatus
 }
