@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-const currentRoundId = 1 //TODO: change to game's current round
+const route = useRoute()
+const currentRoundId = parseInt(<string>route.params.roundId)
 
 const battleStatus = useGetRealtimeBattle(currentRoundId)
 </script>

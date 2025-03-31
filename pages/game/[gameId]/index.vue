@@ -3,7 +3,7 @@ import type { TablesInsert } from "~/types/database.types"
 
 const route = useRoute()
 const client = useSupabaseClient()
-const gameId = parseInt(<string>route.params.id)
+const gameId = parseInt(<string>route.params.gameId)
 const players = useGetRealtimePlayers(gameId)
 const toast = useToast()
 
@@ -26,18 +26,39 @@ async function deletePlayer(playerId: number) {
 }
 
 async function startNewRound() {
-  const currentRoundId = 1 //TODO: get currentRound from current game and increment
-  const playerRoundList: TablesInsert<"player_round">[] = []
-  if (players)
-    players.value?.forEach((player) => {
-      playerRoundList.push({
-        round_id: currentRoundId,
-        player_id: player.id,
-        eliminated_at: null,
+  const { data: currentRound } = await client
+    .from("rounds")
+    .select("number, games!games_current_round_id_fkey()")
+    .eq("games.id", gameId)
+    .single()
+  let newRoundNumber
+  if (currentRound && currentRound.number) {
+    newRoundNumber = currentRound.number + 1
+  } else {
+    newRoundNumber = 1
+  }
+
+  const { data: newRound } = await client
+    .from("rounds")
+    .insert({ game_id: gameId, number: newRoundNumber })
+    .select()
+    .single()
+  if (newRound && newRound.id) {
+    const currentRoundId = newRound.id
+    const playerRoundList: TablesInsert<"player_round">[] = []
+    if (players)
+      players.value?.forEach((player) => {
+        playerRoundList.push({
+          round_id: currentRoundId,
+          player_id: player.id,
+          eliminated_at: null,
+        })
       })
-    })
-  await client.from("player_round").insert(playerRoundList)
-  navigateTo("/battle")
+    await client.from("player_round").insert(playerRoundList)
+    await navigateTo({ name: "game-id-battle" })
+  } else {
+    console.error("Couldn't create a new round. Help!")
+  }
 }
 </script>
 
