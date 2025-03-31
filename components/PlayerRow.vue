@@ -2,6 +2,8 @@
 import type { Form, FormSubmitEvent } from "@nuxt/ui"
 import { z } from "zod"
 
+const props = defineProps({ gameId: { type: Number, required: true } })
+
 const schema = z.object({
   name: z.string().min(1, "Required"),
 })
@@ -17,7 +19,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   const newPlayerName = event.data.name
   const { data, error } = await supabaseClient
     .from("players")
-    .insert({ name: newPlayerName })
+    .insert({ game_id: props.gameId, name: newPlayerName })
     .select("id")
     .single()
 

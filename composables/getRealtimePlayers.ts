@@ -1,5 +1,5 @@
 import type { RealtimeChannel } from "@supabase/supabase-js"
-export const useGetRealtimePlayers = () => {
+export const useGetRealtimePlayers = (gameId: number) => {
   const client = useSupabaseClient()
 
   let realtimeChannel: RealtimeChannel
@@ -10,7 +10,10 @@ export const useGetRealtimePlayers = () => {
     refresh: refreshPlayers,
     error,
   } = useAsyncData("players", async () => {
-    const { data } = await client.from("players").select("id, name")
+    const { data } = await client
+      .from("players")
+      .select("id, name")
+      .eq("game_id", gameId)
     return data
   })
 

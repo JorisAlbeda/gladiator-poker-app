@@ -80,20 +80,31 @@ export type Database = {
       players: {
         Row: {
           created_at: string
+          game_id: number
           id: number
           name: string
         }
         Insert: {
           created_at?: string
+          game_id: number
           id?: number
           name?: string
         }
         Update: {
           created_at?: string
+          game_id?: number
           id?: number
           name?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "players_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       rounds: {
         Row: {

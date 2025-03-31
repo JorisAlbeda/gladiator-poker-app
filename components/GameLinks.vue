@@ -3,7 +3,9 @@ const supaClient = useSupabaseClient()
 
 const { data: games } = await supaClient
   .from("games")
-  .select("id, name, current_round_id")
+  .select(
+    "id, name, current_round_id, players(count), ...rounds!games_current_round_id_fkey(number)"
+  )
 </script>
 
 <template>
@@ -14,7 +16,8 @@ const { data: games } = await supaClient
       variant="ghost"
       class="justify-center"
       :to="{ name: 'game-id', params: { id: game.id } }"
-      >{{ game.name }}</UButton
+      >{{ game.name }} - {{ game.players[0].count }} players - Round
+      {{ game.number }}</UButton
     >
   </div>
 </template>

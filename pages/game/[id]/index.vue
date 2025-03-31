@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import type { TablesInsert } from "~/types/database.types"
 
+const route = useRoute()
 const client = useSupabaseClient()
-const players = useGetRealtimePlayers()
+const gameId = parseInt(<string>route.params.id)
+const players = useGetRealtimePlayers(gameId)
 const toast = useToast()
+
+const { data } = await client
+  .from("games")
+  .select("id, name")
+  .eq("id", gameId)
+  .single()
+const game = data
 
 async function deletePlayer(playerId: number) {
   const response = await client.from("players").delete().eq("id", playerId)
@@ -33,9 +42,9 @@ async function startNewRound() {
 </script>
 
 <template>
-  <div>
+  <div v-if="game && game.id">
     <div class="flex">
-      <h1>Players</h1>
+      <h1>{{ game.name }}</h1>
     </div>
     <UButton
       icon="i-heroicons-plus"
@@ -60,6 +69,10 @@ async function startNewRound() {
         />
       </li>
     </TransitionGroup>
-    <PlayerRow />
+    <PlayerRow :game-id="gameId" />
+  </div>
+  <div v-else>
+    <h1>Game not found!</h1>
+    <UButton to="/">Homepage</UButton>
   </div>
 </template>
