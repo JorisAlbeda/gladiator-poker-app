@@ -15,7 +15,7 @@ const { data: games } = await supaClient
       :key="game.id"
       variant="ghost"
       class="justify-center"
-      :to="{ name: 'game-id', params: { id: game.id } }"
+      :to="{ name: 'game-gameId', params: { gameId: game.id } }"
       >{{ game.name }} - {{ game.players[0].count }} players - Round
       {{ game.number }}</UButton
     >
