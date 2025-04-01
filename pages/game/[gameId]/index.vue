@@ -45,6 +45,10 @@ async function startNewRound() {
     .single()
   if (newRound && newRound.id) {
     const currentRoundId = newRound.id
+    await client
+      .from("games")
+      .update({ current_round_id: currentRoundId })
+      .eq("id", gameId)
     const playerRoundList: TablesInsert<"player_round">[] = []
     if (players)
       players.value?.forEach((player) => {
@@ -55,10 +59,17 @@ async function startNewRound() {
         })
       })
     await client.from("player_round").insert(playerRoundList)
-    await navigateTo({ name: "game-id-battle" })
+    await toBattle(currentRoundId)
   } else {
     console.error("Couldn't create a new round. Help!")
   }
+}
+
+async function toBattle(roundId: number) {
+  await navigateTo({
+    name: "game-gameId-round-roundId-battle",
+    params: { roundId: roundId },
+  })
 }
 </script>
 
