@@ -27,9 +27,9 @@ async function deletePlayer(playerId: number) {
 
 async function startNewRound() {
   const { data: currentRound } = await client
-    .from("rounds")
-    .select("number, games!games_current_round_id_fkey()")
-    .eq("games.id", gameId)
+    .from("games")
+    .select("...rounds!games_current_round_id_fkey(id, number), id")
+    .eq("id", gameId)
     .single()
   let newRoundNumber
   if (currentRound && currentRound.number) {
