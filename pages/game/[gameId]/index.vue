@@ -27,13 +27,21 @@ async function deletePlayer(playerId: number) {
 
 async function startNewRound() {
   const { data: currentRound } = await client
-    .from("rounds")
-    .select("number, games!games_current_round_id_fkey()")
-    .eq("games.id", gameId)
+    .from("games")
+    .select("...rounds!games_current_round_id_fkey(id, number), id")
+    .eq("id", gameId)
     .single()
   let newRoundNumber
+  console.log(currentRound)
   if (currentRound && currentRound.number) {
-    newRoundNumber = currentRound.number + 1
+    const { battleStatus } = useGetBattleStatus(currentRound.id)
+    console.log("active:", battleStatus.value?.roundActive)
+    if (battleStatus.value?.roundActive) {
+      await toBattle(currentRound.id)
+      return
+    } else {
+      newRoundNumber = currentRound.number + 1
+    }
   } else {
     newRoundNumber = 1
   }
