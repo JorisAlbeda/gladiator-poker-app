@@ -4,6 +4,12 @@
 @theme {
   --font-serif: "Source Serif Pro", serif;
   --font-heading: "Onyx", "Georgia";
+  --font-title: "JQKAS Wild", "Onyx";
+
+  --color-primary: #732614;
+  --color-primary-dark: #461818;
+  --color-bg-light: #dfcfb5;
+  --ui-primary: var(--color-primary);
 }
 
 @layer base {
@@ -15,12 +21,30 @@
   [role="button"] {
     @apply cursor-pointer;
     @apply disabled:cursor-not-allowed;
+    @apply font-heading;
+    @apply uppercase;
   }
 
   h1 {
     @apply text-4xl mb-2;
     @apply font-heading;
     @apply uppercase;
+  }
+
+  .main-image {
+    object-position: -188px 155.473%;
+    height: 625px;
+    @apply absolute;
+    @apply left-0;
+    @apply top-0;
+    @apply -z-10;
+    @apply object-cover;
+  }
+
+  .text-outline {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: var(--color-white);
+    paint-order: stroke fill;
   }
 }
 

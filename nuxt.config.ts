@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     typeCheck: false,
   },
   css: ["~/assets/css/main.css"],
-  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/eslint", "@nuxtjs/supabase"],
+  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/eslint", "@nuxtjs/supabase", "@nuxt/image"],
   supabase: {
     redirect: false,
   },
