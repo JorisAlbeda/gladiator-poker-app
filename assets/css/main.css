@@ -2,10 +2,15 @@
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: "Public Sans", sans-serif;
+  --font-serif: "Source Serif Pro", serif;
+  --font-heading: "Onyx";
 }
 
 @layer base {
+  html {
+    @apply font-serif;
+  }
+
   button,
   [role="button"] {
     @apply cursor-pointer;
@@ -14,6 +19,8 @@
 
   h1 {
     @apply text-4xl mb-2;
+    @apply font-heading;
+    @apply uppercase;
   }
 }
 
