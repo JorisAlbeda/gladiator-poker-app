@@ -78,30 +78,35 @@ async function toBattle(roundId: number) {
     <div class="flex">
       <h1>{{ game.name }}</h1>
     </div>
-    <UButton
-      icon="i-heroicons-plus"
-      size="sm"
-      color="primary"
-      class="mb-4"
-      @click="startNewRound"
-      >New Round</UButton
-    >
-    <TransitionGroup name="list" tag="ul">
-      <li
-        v-for="player in players"
-        :key="player.id"
-        class="flex justify-between items-center w-sm mb-1"
+
+    <UCard class="w-full md:w-sm mt-4">
+      <TransitionGroup name="list" tag="ul">
+        <li
+          v-for="player in players"
+          :key="player.id"
+          class="flex justify-between items-center mb-1"
+        >
+          <span>{{ player.name }}</span>
+          <UButton
+            icon="i-heroicons-trash"
+            color="error"
+            loading-auto
+            @click="deletePlayer(player.id)"
+          />
+        </li>
+      </TransitionGroup>
+      <PlayerRow :game-id="gameId" />
+    </UCard>
+    <UCard class="w-full md:w-sm mt-4">
+      <h1>New Round</h1>
+      <UButton
+        size="xl"
+        color="warning"
+        class="w-full justify-center text-primary text-2xl"
+        @click="startNewRound"
+        >To Battle!</UButton
       >
-        <span>{{ player.name }}</span>
-        <UButton
-          icon="i-heroicons-trash"
-          color="error"
-          loading-auto
-          @click="deletePlayer(player.id)"
-        />
-      </li>
-    </TransitionGroup>
-    <PlayerRow :game-id="gameId" />
+    </UCard>
   </div>
   <div v-else>
     <h1>Game not found!</h1>
