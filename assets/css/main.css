@@ -3,7 +3,7 @@
 
 @theme {
   --font-serif: "Source Serif Pro", serif;
-  --font-heading: "Onyx";
+  --font-heading: "Onyx", "Georgia";
 }
 
 @layer base {
