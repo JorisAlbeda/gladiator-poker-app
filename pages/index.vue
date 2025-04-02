@@ -12,12 +12,14 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="">
-    <h1 class="mt-70 font-title text-primary text-7xl text-center text-outline">
+  <div class="flex flex-col h-screen bg-bg-light">
+    <NuxtImg src="/AceSamurai.jpeg" class="main-image h-full" />
+    <h1
+      class="absolute top-70 font-title text-primary text-7xl text-center text-outline"
+    >
       Gladiator Poker
     </h1>
-    <NuxtImg src="/AceSamurai.jpeg" class="main-image" />
-    <div class="mt-10">
+    <div class="bg-bg-light py-6">
       <GameLinks v-if="isLoading" />
       <div v-else class="flex flex-col gap-4 justify-center">
         <UButton

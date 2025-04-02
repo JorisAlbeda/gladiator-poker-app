@@ -32,12 +32,7 @@
   }
 
   .main-image {
-    object-position: -188px 155.473%;
-    height: 625px;
-    @apply absolute;
-    @apply left-0;
-    @apply top-0;
-    @apply -z-10;
+    object-position: 100% 0;
     @apply object-cover;
   }
 

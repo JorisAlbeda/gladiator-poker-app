@@ -1,6 +1,6 @@
 <template>
   <UApp>
-    <div class="bg-bg-light h-screen w-screen">
+    <div>
       <slot />
     </div>
   </UApp>
