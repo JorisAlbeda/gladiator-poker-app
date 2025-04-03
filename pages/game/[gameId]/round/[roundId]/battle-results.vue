@@ -6,27 +6,36 @@ const battleStatus = useGetRealtimeBattle(currentRoundId)
 </script>
 
 <template>
-  <div>
-    <h1 v-if="battleStatus?.roundActive">Current Battle</h1>
-    <h1 v-else>Battle results</h1>
-    <ul>
-      <TransitionGroup name="list">
-        <li
-          v-for="(player, index) in battleStatus?.players"
-          :key="player.id"
-          class="flex justify-between items-center w-sm mb-1"
-        >
-          <span>{{ player.name }}</span>
+  <div class="flex justify-center">
+    <div class="max-w-lg flex-1">
+      <GladiatorCard
+        color="secondary"
+        :title="battleStatus?.roundActive ? 'Current Battle' : 'Battle results'"
+      >
+        <ul>
+          <TransitionGroup name="list">
+            <li
+              v-for="(player, index) in battleStatus?.players"
+              :key="player.id"
+              class="flex justify-between items-center mb-2 h-10"
+            >
+              <span>{{ player.name }}</span>
+              <div
+                class="w-20 flex justify-center uppercase font-heading text-2xl"
+              >
+                <span v-if="battleStatus?.roundActive && !player.eliminated_at"
+                  >Alive</span
+                >
 
-          <span
-            v-if="battleStatus?.roundActive && !player.eliminated_at"
-            class="text-green-500"
-            >Alive</span
-          >
-          <span v-else-if="index < 5" class="font-bold">{{ index + 1 }}</span>
-          <span v-else>-</span>
-        </li>
-      </TransitionGroup>
-    </ul>
+                <span v-else-if="index < 5" class="text-yellow-500">{{
+                  index + 1
+                }}</span>
+                <span v-else class="text-primary-dark">-</span>
+              </div>
+            </li>
+          </TransitionGroup>
+        </ul>
+      </GladiatorCard>
+    </div>
   </div>
 </template>

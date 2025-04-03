@@ -25,7 +25,7 @@ async function hitPlayer(playerId: number) {
           <div
             v-for="(player, index) in battleStatus?.players"
             :key="player.id"
-            class="flex justify-between items-center mb-2"
+            class="flex justify-between items-center mb-2 h-10"
           >
             <span>{{ player.name }}</span>
             <div
