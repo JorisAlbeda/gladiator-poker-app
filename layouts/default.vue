@@ -6,7 +6,7 @@ const isOnline = useOnline()
 
 <template>
   <UApp>
-    <UContainer class="py-8 bg-bg-dark">
+    <UContainer class="py-8 bg-bg-dark h-screen">
       <UAlert
         v-if="!isOnline"
         color="error"

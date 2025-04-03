@@ -17,32 +17,42 @@ async function hitPlayer(playerId: number) {
 <template>
   <div class="flex justify-center">
     <div class="max-w-lg flex-1">
-      <h1 v-if="battleStatus?.roundActive">Battle</h1>
-      <h1 v-else>Battle Over!</h1>
-      <TransitionGroup name="list">
-        <UCard
-          v-for="(player, index) in battleStatus?.players"
-          :key="player.id"
-        >
-          <div class="flex justify-between">
+      <GladiatorCard
+        color="primary"
+        :title="battleStatus?.roundActive ? 'Battle' : 'Battle over!'"
+      >
+        <TransitionGroup name="list">
+          <div
+            v-for="(player, index) in battleStatus?.players"
+            :key="player.id"
+            class="flex justify-between items-center mb-2"
+          >
             <span>{{ player.name }}</span>
-            <div v-if="battleStatus?.roundActive">
+            <div
+              v-if="battleStatus?.roundActive"
+              class="w-20 flex justify-center"
+            >
               <UButton
                 v-if="!player.eliminated_at"
-                color="error"
+                color="warning"
+                class="w-full justify-center text-primary text-2xl"
                 loading-auto
                 @click="hitPlayer(player.id)"
                 >Hit</UButton
               >
-              <span v-else class="text-error-200">Uitgeschakeld</span>
+              <span
+                v-else
+                class="text-primary-dark uppercase font-heading text-2xl"
+                >Eliminated</span
+              >
             </div>
             <div v-else>
               <span v-if="index < 5">{{ index + 1 }}</span>
               <span v-else>-</span>
             </div>
           </div>
-        </UCard>
-      </TransitionGroup>
+        </TransitionGroup>
+      </GladiatorCard>
     </div>
   </div>
 </template>

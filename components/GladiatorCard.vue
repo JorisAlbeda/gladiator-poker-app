@@ -21,13 +21,13 @@ defineProps({
     }"
   >
     <BrushStroke
-      class="w-72 h-32 left-[220px] top-[269.97px] absolute origin-top-left rotate-[-59.53deg] opacity-30"
+      class="w-72 h-32 left-[220px] top-[269.97px] absolute origin-top-left rotate-[-59.53deg] pointer-events-none opacity-30"
     />
     <BrushStroke
-      class="w-96 h-24 left-[415.60px] top-[0.06px] absolute origin-top-left rotate-[120.92deg] opacity-20"
+      class="w-96 h-24 left-[415.60px] top-[0.06px] absolute origin-top-left rotate-[120.92deg] pointer-events-none opacity-20"
     />
     <BrushStroke
-      class="w-[518.33px] h-24 left-[350.95px] top-[-19.23px] absolute origin-top-left rotate-[120.05deg] opacity-10"
+      class="w-[518.33px] h-24 left-[350.95px] top-[-19.23px] absolute origin-top-left rotate-[120.05deg] pointer-events-none opacity-10"
     />
     <DecorationLine />
     <h2 class="text-3xl text-center my-6">{{ title }}</h2>
