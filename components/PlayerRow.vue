@@ -49,19 +49,20 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     @submit.prevent="onSubmit"
   >
     <div class="flex gap-4">
-      <UFormField name="name">
+      <UFormField name="name" class="w-full">
         <UInput
           v-model="formState.name"
           type="text"
           placeholder="New player name"
-          icon="i-heroicons-plus-circle-solid"
+          icon="material-symbols:add"
+          class="w-full text-white"
         />
       </UFormField>
       <template v-if="formState.name && formState.name.length > 0">
         <UButton
           loading-auto
-          icon="i-heroicons-check"
-          color="secondary"
+          icon="material-symbols:check"
+          class="bg-accent-texture"
           type="submit"
           >Save
         </UButton>

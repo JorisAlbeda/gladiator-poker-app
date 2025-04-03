@@ -20,6 +20,8 @@
   --color-brown: #927a54;
 
   --ui-bg: var(--color-bg-dark);
+  --ui-text-highlighted: var(--color-accent);
+  --ui-text-dimmed: var(--color-body);
 
   --accent-texture: linear-gradient(#ffc9402a, #ffc9407a),
     url("/texture.png") var(--color-accent);
