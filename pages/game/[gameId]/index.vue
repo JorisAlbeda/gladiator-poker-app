@@ -91,6 +91,7 @@ async function toBattle(roundId: number) {
       <BrushStroke
         class="w-[518.33px] h-24 left-[350.95px] top-[-19.23px] absolute origin-top-left rotate-[120.05deg] opacity-10"
       ></BrushStroke>
+      <h2 class="text-3xl text-center">Players</h2>
       <TransitionGroup name="list" tag="ul">
         <li
           v-for="player in players"

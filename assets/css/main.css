@@ -12,6 +12,7 @@
   --color-body: #eccf97;
 
   --color-bg-light: #dfcfb5;
+  --color-bg-dark: #272724;
   --ui-primary: var(--color-primary);
 
   --color-grey: #393a35;
@@ -33,6 +34,15 @@
 
   h1 {
     @apply text-4xl;
+    @apply font-heading;
+    @apply uppercase;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading;
     @apply uppercase;
   }
