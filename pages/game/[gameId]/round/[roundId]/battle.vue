@@ -35,7 +35,7 @@ async function hitPlayer(playerId: number) {
               <UButton
                 v-if="!player.eliminated_at"
                 color="warning"
-                class="w-full justify-center text-primary text-2xl"
+                class="w-full justify-center text-primary text-2xl bg-accent-texture"
                 loading-auto
                 @click="hitPlayer(player.id)"
                 >Hit</UButton

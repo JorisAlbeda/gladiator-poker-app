@@ -10,6 +10,7 @@
   --color-primary-dark: #461818;
   --color-primary-light: #a84530;
   --color-body: #eccf97;
+  --color-accent: #ffc940;
 
   --color-bg-light: #dfcfb5;
   --color-bg-dark: #272724;
@@ -17,6 +18,9 @@
 
   --color-grey: #393a35;
   --color-brown: #927a54;
+
+  --accent-texture: linear-gradient(#ffc9402a, #ffc9407a),
+    url("/texture.png") var(--color-accent);
 }
 
 @layer base {
@@ -76,5 +80,9 @@
      animations can be calculated correctly. */
   .list-leave-active {
     position: absolute;
+  }
+
+  .bg-accent-texture {
+    background: var(--accent-texture);
   }
 }

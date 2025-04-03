@@ -102,7 +102,7 @@ async function toBattle(roundId: number) {
       <UButton
         size="xl"
         color="warning"
-        class="w-full justify-center text-primary text-2xl"
+        class="w-full justify-center text-primary text-2xl bg-accent-texture"
         loading-auto
         @click="startNewRound"
         >To Battle!</UButton
