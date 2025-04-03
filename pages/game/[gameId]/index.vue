@@ -79,19 +79,7 @@ async function toBattle(roundId: number) {
       <h1>{{ game.name }}</h1>
     </div>
 
-    <UCard
-      class="w-full md:w-sm mt-4 bg-grey text-body overflow-hidden relative"
-    >
-      <BrushStroke
-        class="w-72 h-32 left-[220px] top-[269.97px] absolute origin-top-left rotate-[-59.53deg] opacity-30"
-      ></BrushStroke>
-      <BrushStroke
-        class="w-96 h-24 left-[415.60px] top-[0.06px] absolute origin-top-left rotate-[120.92deg] opacity-20"
-      ></BrushStroke>
-      <BrushStroke
-        class="w-[518.33px] h-24 left-[350.95px] top-[-19.23px] absolute origin-top-left rotate-[120.05deg] opacity-10"
-      ></BrushStroke>
-      <h2 class="text-3xl text-center">Players</h2>
+    <GladiatorCard title="Players" color="secondary">
       <TransitionGroup name="list" tag="ul">
         <li
           v-for="player in players"
@@ -109,9 +97,8 @@ async function toBattle(roundId: number) {
         </li>
       </TransitionGroup>
       <PlayerRow :game-id="gameId" />
-    </UCard>
-    <UCard class="w-full md:w-sm mt-4 bg-primary-light text-body">
-      <h2 class="text-3xl text-center mb-2">New Round</h2>
+    </GladiatorCard>
+    <GladiatorCard title="New Round" color="primary">
       <UButton
         size="xl"
         color="warning"
@@ -119,7 +106,7 @@ async function toBattle(roundId: number) {
         @click="startNewRound"
         >To Battle!</UButton
       >
-    </UCard>
+    </GladiatorCard>
   </div>
   <div v-else>
     <h1>Game not found!</h1>
