@@ -110,8 +110,8 @@ async function toBattle(roundId: number) {
       </TransitionGroup>
       <PlayerRow :game-id="gameId" />
     </UCard>
-    <UCard class="w-full md:w-sm mt-4">
-      <h1>New Round</h1>
+    <UCard class="w-full md:w-sm mt-4 bg-primary-light text-body">
+      <h2 class="text-3xl text-center mb-2">New Round</h2>
       <UButton
         size="xl"
         color="warning"
