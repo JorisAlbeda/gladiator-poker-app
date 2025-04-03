@@ -8,8 +8,14 @@
 
   --color-primary: #732614;
   --color-primary-dark: #461818;
+  --color-primary-light: #a84530;
+  --color-body: #eccf97;
+
   --color-bg-light: #dfcfb5;
   --ui-primary: var(--color-primary);
+
+  --color-grey: #393a35;
+  --color-brown: #927a54;
 }
 
 @layer base {
@@ -26,7 +32,7 @@
   }
 
   h1 {
-    @apply text-4xl mb-2;
+    @apply text-4xl;
     @apply font-heading;
     @apply uppercase;
   }

@@ -75,11 +75,22 @@ async function toBattle(roundId: number) {
 
 <template>
   <div v-if="game && game.id">
-    <div class="flex">
+    <div class="flex justify-center bg-brown text-primary-dark">
       <h1>{{ game.name }}</h1>
     </div>
 
-    <UCard class="w-full md:w-sm mt-4">
+    <UCard
+      class="w-full md:w-sm mt-4 bg-grey text-body overflow-hidden relative"
+    >
+      <BrushStroke
+        class="w-72 h-32 left-[220px] top-[269.97px] absolute origin-top-left rotate-[-59.53deg] opacity-30"
+      ></BrushStroke>
+      <BrushStroke
+        class="w-96 h-24 left-[415.60px] top-[0.06px] absolute origin-top-left rotate-[120.92deg] opacity-20"
+      ></BrushStroke>
+      <BrushStroke
+        class="w-[518.33px] h-24 left-[350.95px] top-[-19.23px] absolute origin-top-left rotate-[120.05deg] opacity-10"
+      ></BrushStroke>
       <TransitionGroup name="list" tag="ul">
         <li
           v-for="player in players"
@@ -88,8 +99,9 @@ async function toBattle(roundId: number) {
         >
           <span>{{ player.name }}</span>
           <UButton
-            icon="i-heroicons-trash"
-            color="error"
+            icon="material-symbols:close"
+            size="xl"
+            class="bg-primary text-body"
             loading-auto
             @click="deletePlayer(player.id)"
           />
