@@ -19,6 +19,8 @@
   --color-grey: #393a35;
   --color-brown: #927a54;
 
+  --ui-bg: var(--color-bg-dark);
+
   --accent-texture: linear-gradient(#ffc9402a, #ffc9407a),
     url("/texture.png") var(--color-accent);
 }

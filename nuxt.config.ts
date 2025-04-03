@@ -6,11 +6,17 @@ export default defineNuxtConfig({
     typeCheck: false,
   },
   css: ["~/assets/css/main.css"],
-  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/eslint", "@nuxtjs/supabase", "@nuxt/image"],
+  modules: [
+    "@pinia/nuxt",
+    "@nuxt/ui",
+    "@nuxt/eslint",
+    "@nuxtjs/supabase",
+    "@nuxt/image",
+  ],
   supabase: {
     redirect: false,
   },
   colorMode: {
-    preference: "light",
+    preference: "dark",
   },
 })
