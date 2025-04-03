@@ -2,8 +2,8 @@
 @import "@nuxt/ui";
 
 @theme {
-  --font-serif: "Source Serif Pro", serif;
-  --font-heading: "Onyx", "Georgia";
+  --font-serif: "Source Serif Pro", "Source Serif 4", serif;
+  --font-heading: "Onyx", "Sardonyx", "Georgia";
   --font-title: "JQKAS Wild", "Onyx";
 
   --color-primary: #732614;
