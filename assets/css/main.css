@@ -89,4 +89,14 @@
   .bg-accent-texture {
     background: var(--accent-texture);
   }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
 }
