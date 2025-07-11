@@ -25,18 +25,27 @@ async function deletePlayer(playerId: number) {
   }
 }
 
-async function startNewRound() {
+async function getCurrentRoundNumber() {
   const { data: currentRound } = await client
     .from("games")
     .select("...rounds!games_current_round_id_fkey(id, number), id")
     .eq("id", gameId)
     .single()
-  let newRoundNumber
+  let roundNumber
   if (currentRound && currentRound.number) {
-    newRoundNumber = currentRound.number + 1
+    roundNumber = currentRound.number
   } else {
-    newRoundNumber = 1
+    roundNumber = 0
   }
+  return roundNumber
+}
+
+async function getNewRoundNumber() {
+  return (await getCurrentRoundNumber()) + 1
+}
+
+async function startNewRound() {
+  let newRoundNumber = await getNewRoundNumber()
 
   const { data: newRound } = await client
     .from("rounds")
@@ -65,10 +74,20 @@ async function startNewRound() {
   }
 }
 
+async function spectate() {
+  let roundNumber = await getCurrentRoundNumber()
+  if (roundNumber > 0) {
+    await navigateTo({
+      name: "game-gameId-round-roundNumber-battle-results",
+      params: { roundNumber: roundNumber, gameId: gameId },
+    })
+  }
+}
+
 async function toBattle(roundId: number) {
   await navigateTo({
     name: "game-gameId-round-roundId-battle",
-    params: { roundId: roundId },
+    params: { roundId: roundId, gameId: gameId },
   })
 }
 </script>
@@ -106,6 +125,14 @@ async function toBattle(roundId: number) {
         loading-auto
         @click="startNewRound"
         >To Battle!</UButton
+      >
+      <UButton
+        size="xl"
+        color="warning"
+        class="w-full justify-center text-2xl bg-white mt-3"
+        loading-auto
+        @click="spectate"
+        >Spectate</UButton
       >
     </GladiatorCard>
   </div>

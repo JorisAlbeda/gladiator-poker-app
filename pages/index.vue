@@ -2,6 +2,20 @@
 const isLoading = ref(false)
 const recentGameId = null
 
+async function newGame() {
+  const supaClient = useSupabaseClient()
+
+  const { data: game } = await supaClient
+    .from("games")
+    .insert({ name: "Ulenpas" })
+    .select()
+    .single()
+
+  if (game) {
+    await navigateTo({ name: "game-gameId", params: { gameId: game.id } })
+  }
+}
+
 function loadGame() {
   isLoading.value = true
 }
@@ -28,7 +42,10 @@ definePageMeta({
           class="justify-center text-6xl underline"
           >Continue</UButton
         >
-        <UButton variant="ghost" class="justify-center text-4xl underline"
+        <UButton
+          variant="ghost"
+          class="justify-center text-4xl underline"
+          @click="newGame"
           >New Game</UButton
         >
         <UButton

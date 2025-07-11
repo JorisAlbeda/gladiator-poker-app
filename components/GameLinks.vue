@@ -6,6 +6,7 @@ const { data: games } = await supaClient
   .select(
     "id, name, current_round_id, players(count), ...rounds!games_current_round_id_fkey(number)"
   )
+  .order("id", { ascending: false })
 </script>
 
 <template>
