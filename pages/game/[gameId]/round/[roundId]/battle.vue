@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const route = useRoute()
 const currentRoundId = parseInt(<string>route.params.roundId)
+const gameId = parseInt(<string>route.params.gameId)
 
 const supaClient = useSupabaseClient()
 const battleStatus = useGetRealtimeBattle(currentRoundId)
@@ -52,6 +53,13 @@ async function hitPlayer(playerId: number) {
             </div>
           </div>
         </TransitionGroup>
+        <div class="text-center">
+          <NuxtLink
+            :to="{ name: 'game-gameId', params: { gameId: gameId } }"
+            class="text-accent text-2xl"
+            >Return</NuxtLink
+          >
+        </div>
       </GladiatorCard>
     </div>
   </div>
